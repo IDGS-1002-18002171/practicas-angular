@@ -1,0 +1,21 @@
+
+<div class="contenedor">
+    <h2>Cinepolis</h2>
+    <h2>Entradas</h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="nombres" type="text" placeholder="Nombres" >
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="compradores" type="number" placeholder="Compradores" >
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="boletas" type="number" placeholder="# de Boletas" >
+    </mat-form-field>
+    <mat-radio-group name="cineco" [(ngModel)]="cineco">
+        <mat-radio-button *ngFor="let op of tipoCineco" [value]="op" name="cineco" style="margin:10px;">
+          {{op}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <button mat-raised-button color="primary" (click)="calcular()">Calcular</button>
+    <h1><p>{{resp}}</p></h1>
+  </div>

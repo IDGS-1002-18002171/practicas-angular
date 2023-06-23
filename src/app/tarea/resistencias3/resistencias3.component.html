@@ -1,0 +1,51 @@
+<div class="contenedor">
+    <h2>Resistencias</h2>
+    <button (click)="showImage()" class="btn btn-primary">{{muestraImg?'Ocultar':'Muestra'}}Imagen</button>
+    <img *ngIf="muestraImg" [src]="imagen" [style.margin.px]="imageMargin" [style.height.px]="300" class="">
+    <h2>Entradas</h2>
+    <label>Banda 1</label>
+    <select name="miselect" [(ngModel)]="combo1" (change)="calcular()" [style.background-color]="lista1[combo1]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <label>Banda 2</label>
+    <select name="miselect" [(ngModel)]="combo2" (change)="calcular()" [style.background-color]="lista1[combo2]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <label>Banda 3</label>
+    <select name="miselect" [(ngModel)]="combo3" (change)="calcular()" [style.background-color]="lista1[combo3]">
+        <option [value]="indice1" *ngFor="let item of lista1 let indice1=index;"
+        [style.background-color]="item">{{item}}</option>
+    </select>
+    <mat-radio-group name="tolerancia" [(ngModel)]="tolerancia" >
+        <mat-radio-button *ngFor="let op of tipoTolerancia" [value]="op" name="tolerancia" style="margin:10px;">
+          {{op}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <button mat-raised-button color="primary" (click)="calcular()">Calcular</button>
+    <hr>
+    <h2>Salidas</h2>
+    <table>
+        <tr>
+            <td>Banda 1</td>
+            <th>Banda 2</th>
+            <th>Banda 3</th>
+            <th>Tolerancia</th>
+            <th>Valor</th>
+            <th>Menor</th>
+            <th>Mayor</th>
+            <th>Porc</th>
+        </tr>
+        <tbody>
+            <th [style.background-color]="lista1[combo1]">{{lista1[combo1]}}</th>
+            <th [style.background-color]="lista1[combo2]">{{lista1[combo2]}}</th>
+            <th [style.background-color]="lista1[combo3]">{{lista1[combo3]}}</th>
+            <th [style.background-color]="tolerancia">{{tolerancia}}</th>
+            <th>{{valor}} ohms</th>
+            <th>{{menor}} ohms</th>
+            <th>{{mayor}} ohms</th>
+            <th>{{porc}} ohms</th>
+        </tbody>
+    </table>
+  </div>
