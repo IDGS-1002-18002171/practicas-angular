@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class Resistencias3Component {
   muestraImg:boolean=true;
   imageMargin:number=20;
-  combo1:number=0;
-  combo2:number=0;
-  combo3:number=0;
+  combo1!:number;
+  combo2!:number;
+  combo3!:number;
   radio!:string;
   valor!:string;
   menor!:number;
@@ -34,7 +34,6 @@ export class Resistencias3Component {
     'Gold',
     'Silver'
   ]
-  index!:number;
   calcular(){
     this.valor=""+this.combo1+this.combo2* Math.pow(10, this.combo3);
     if(this.tolerancia=="Gold"){
