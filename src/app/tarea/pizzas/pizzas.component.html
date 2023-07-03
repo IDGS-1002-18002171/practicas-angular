@@ -1,0 +1,90 @@
+<h1>Registro de Pizzas</h1>
+<div class="row">
+    <div class="col-12">
+        <form (ngSubmit)="onSubmit()" [formGroup]="pizzasForm">
+            <div class="row">
+                <div class="col-4">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" formControlName="nombre" name="nombre" class="form-control">
+                </div>
+                <div class="col-4">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" id="direccion" formControlName="direccion" name="direccion" class="form-control">
+                </div>
+                <div class="col-4">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" id="telefono" formControlName="telefono" name="telefono" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label for="tamanio" class="form-label">Tamaño</label><br>
+                    <div class="form-check">
+                        <input type="radio" id="tamanioChica" formControlName="tamanio" name="tamanio" value="pequeno" class="form-check-input">
+                        <label for="tamanioChica" class="form-check-label">Chica $40</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="tamanioMediana" formControlName="tamanio" name="tamanio" value="mediano" class="form-check-input">
+                        <label for="tamanioMediana" class="form-check-label">Mediana $80</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="tamanioGrande" formControlName="tamanio" name="tamanio" value="grande" class="form-check-input">
+                        <label for="tamanioGrande" class="form-check-label">Grande $120</label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="ingredientes" class="form-label">Ingredientes</label><br>
+                    <div *ngFor="let ingrediente of ingredientesDisponibles" class="form-check">
+                        <input type="checkbox" [id]="'ingrediente-' + ingrediente" name="ingredientes" [formControlName]="'ingredientes'" [value]="ingrediente" class="form-check-input" (change)="actualizarIngredientes(ingrediente)">
+                        <label [for]="'ingrediente-' + ingrediente" class="form-check-label">{{ingrediente}} $10</label>
+                    </div>
+                </div>               
+                <div class="col-4">
+                    <label for="numPizzas" class="form-label">No. de Pizzas</label>
+                    <input type="number" id="numPizzas" formControlName="numPizzas" name="numPizzas" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="d-grid gap-2 col-4 float-end">
+                <button class="btn btn-info btn-lg" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-6">
+        <h1>Pizzas</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tamaño</th>
+                    <th>Ingredientes</th>
+                    <th># de pizzas</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pizza of pizzas">
+                    <td>{{ pizza.tamanio }}</td>
+                    <td>
+                        <ul>
+                          <li *ngFor="let ingrediente of pizza.ingredientes">{{ingrediente}}</li>
+                        </ul>
+                    </td>                      
+                    <td>{{ pizza.numPizzas }}</td>
+                    <td>{{ pizza.subTotal }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <button class="btn btn-danger" (click)="quitarUltimaPizza()">Quitar última pizza</button>
+            <button class="btn btn-success" (click)="terminarCompra()">Terminar compra</button>
+        </div>   
+        <hr>
+        <h3>Total: {{ total }}</h3>
+        <h3>Nombre del usuario: {{ nombreUsuario }}</h3>
+    </div>
+    <div class="form-group col-6">
+        <label for="ventasDia">Ventas del día</label>
+        <textarea id="ventasDia" class="form-control" rows="10" [value]="ventasDia" readonly></textarea>
+        <h3>Ventas totales del día: {{totalDia}}</h3>
+    </div>
+</div>
