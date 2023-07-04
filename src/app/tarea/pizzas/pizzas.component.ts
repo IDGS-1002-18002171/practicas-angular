@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IPizzas } from 'src/app/pizzas';
 import { formatDate } from '@angular/common';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -103,24 +103,36 @@ export class PizzasComponent {
       this.ingredientesSeleccionados.push(ingrediente);
     }
   }
-  quitarUltimaPizza(): void {
-    this.pizzas.pop(); // Remover el último elemento de la lista de pizzas
+
+  eliminarPizza(index: number): void {
+    this.pizzas.splice(index, 1);
   }
   
   terminarCompra(): void {
     this.mostrarConfirmacion = true;
-    // Mostrar la alerta de confirmación
-    const confirmacion = window.confirm('¿Estás seguro de finalizar la compra?');
-    if (confirmacion) {
-      // Agrega la venta al registro del día
-      const nuevaVenta = `Cliente: ${this.nombreUsuario}, Total: ${this.total}, Fecha: ${formatDate(new Date(), 'hh:mm:ss a', 'en-US')}`;
-      this.totalDia += this.total;
-      this.ventasDia += nuevaVenta + '\n';
-      this.total=0;
-      // Reinicia el formulario y la lista de pizzas
-      this.pizzasForm.reset();
-      this.pizzas = [];
-    }
+    // Mostrar la alerta de confirmación personalizada
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Estás seguro de finalizar la compra?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, finalizar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Agrega la venta al registro del día
+        const nuevaVenta = `Cliente: ${this.nombreUsuario}, Total: ${this.total}, Fecha: ${formatDate(new Date(), ' dd-mm-yyyy hh:mm:ss a', 'en-US')}`;
+        this.totalDia += this.total;
+        this.ventasDia += nuevaVenta + '\n';
+        this.total = 0;
+        // Reinicia el formulario y la lista de pizzas
+        this.pizzasForm.reset();
+        this.pizzas = [];
+      }
+    });
   }
+  
   
 }

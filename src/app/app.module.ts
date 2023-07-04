@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './tarea/menu/menu.component';
 import { CineModule } from './tarea/cine/cine.module';
 import { ResistenciaModule } from './tarea/resistencia/resistencia.module';
-import { PizzasComponent } from './tarea/pizzas/pizzas.component';
 import { PizzeriaModule } from './tarea/pizzeria/pizzeria.module';
 
 @NgModule({

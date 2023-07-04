@@ -1,5 +1,5 @@
-<h1>Registro de Pizzas</h1>
-<div class="row">
+<h1>Nueva compra</h1>
+<div class="row verdoso-fondo">
     <div class="col-12">
         <form (ngSubmit)="onSubmit()" [formGroup]="pizzasForm">
             <div class="row">
@@ -16,6 +16,7 @@
                     <input type="text" id="telefono" formControlName="telefono" name="telefono" class="form-control">
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-4">
                     <label for="tamanio" class="form-label">Tamaño</label><br>
@@ -44,13 +45,13 @@
                     <input type="number" id="numPizzas" formControlName="numPizzas" name="numPizzas" class="form-control">
                 </div>
             </div>
-            <br>
+            <hr>
             <div class="d-grid gap-2 col-4 float-end">
                 <button class="btn btn-info btn-lg" type="submit">Guardar</button>
             </div>
         </form>
     </div>
-    <div class="col-6">
+    ><div class="col-5">
         <h1>Pizzas</h1>
         <table class="table">
             <thead>
@@ -59,10 +60,11 @@
                     <th>Ingredientes</th>
                     <th># de pizzas</th>
                     <th>Subtotal</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let pizza of pizzas">
+                <tr *ngFor="let pizza of pizzas; let i = index">
                     <td>{{ pizza.tamanio }}</td>
                     <td>
                         <ul>
@@ -71,11 +73,13 @@
                     </td>                      
                     <td>{{ pizza.numPizzas }}</td>
                     <td>{{ pizza.subTotal }}</td>
+                    <td>
+                        <button class="btn btn-danger" (click)="eliminarPizza(i)">Eliminar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
         <div>
-            <button class="btn btn-danger" (click)="quitarUltimaPizza()">Quitar última pizza</button>
             <button class="btn btn-success" (click)="terminarCompra()">Terminar compra</button>
         </div>   
         <hr>
