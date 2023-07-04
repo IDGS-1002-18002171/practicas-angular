@@ -45,20 +45,19 @@
                     <input type="number" id="numPizzas" formControlName="numPizzas" name="numPizzas" class="form-control">
                 </div>
             </div>
-            <hr>
             <div class="d-grid gap-2 col-4 float-end">
                 <button class="btn btn-info btn-lg" type="submit">Guardar</button>
             </div>
         </form>
     </div>
-    ><div class="col-5">
+    <div class="col-5">
         <h1>Pizzas</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th>Tamaño</th>
                     <th>Ingredientes</th>
-                    <th># de pizzas</th>
+                    <th>No. de pizzas</th>
                     <th>Subtotal</th>
                     <th>Eliminar</th>
                 </tr>
@@ -86,7 +85,8 @@
         <h3>Total: {{ total }}</h3>
         <h3>Nombre del usuario: {{ nombreUsuario }}</h3>
     </div>
-    <div class="form-group col-6">
+    <div class="col-1"></div>
+    <div class="form-group col-5">
         <label for="ventasDia">Ventas del día</label>
         <textarea id="ventasDia" class="form-control" rows="10" [value]="ventasDia" readonly></textarea>
         <h3>Ventas totales del día: {{totalDia}}</h3>

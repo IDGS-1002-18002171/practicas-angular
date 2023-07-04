@@ -38,51 +38,52 @@ export class PizzasComponent {
     const dir = this.pizzasForm.get('direccion')?.value;
     const tel = this.pizzasForm.get('telefono')?.value;
     
-  let subTotal = 0; // Variable para almacenar el subtotal
+    let subTotal = 0; // Variable para almacenar el subtotal
 
-  // Calcular el subtotal basado en el tamaño de la pizza
-  switch (tam) {
-    case 'pequeno':
-      subTotal = num * 40;
-      break;
-    case 'mediano':
-      subTotal = num * 80;
-      break;
-    case 'grande':
-      subTotal = num * 120;
-      break;
-    default:
-      break;
-  }
-
-  // Calcular el costo adicional de los ingredientes seleccionados
-  this.ingredientesSeleccionados.forEach((ingrediente: string) => {
-    switch (ingrediente) {
-      case 'jamon':
-      case 'piña':
-      case 'champiñones':
-        subTotal += num * 10;
+    // Calcular el subtotal basado en el tamaño de la pizza
+    switch (tam) {
+      case 'pequeno':
+        subTotal = num * 40;
+        break;
+      case 'mediano':
+        subTotal = num * 80;
+        break;
+      case 'grande':
+        subTotal = num * 120;
         break;
       default:
         break;
     }
-  });
 
-  this.total += subTotal;
-  
-  this.nombreUsuario = nom;
+    // Calcular el costo adicional de los ingredientes seleccionados
+    this.ingredientesSeleccionados.forEach((ingrediente: string) => {
+      switch (ingrediente) {
+        case 'jamon':
+        case 'piña':
+        case 'champiñones':
+          subTotal += num * 10;
+          break;
+        default:
+          break;
+      }
+    });
 
-  this.pizzas.push({
-    tamanio: tam,
-    ingredientes: [...this.ingredientesSeleccionados],
-    numPizzas: num,
-    subTotal: subTotal,
-    nombre: nom,
-    direccion: dir,
-    telefono: tel,
-    ventasDia:''
-  });
-}
+    this.total += subTotal;
+    
+    this.nombreUsuario = nom;
+
+    this.pizzas.push({
+      tamanio: tam,
+      ingredientes: [...this.ingredientesSeleccionados],
+      numPizzas: num,
+      subTotal: subTotal,
+      nombre: nom,
+      direccion: dir,
+      telefono: tel,
+      ventasDia:''
+    });
+    subTotal=0;
+  }
 
   initForm():FormGroup{
     return this.fb.group({
@@ -130,6 +131,7 @@ export class PizzasComponent {
         // Reinicia el formulario y la lista de pizzas
         this.pizzasForm.reset();
         this.pizzas = [];
+        this.ingredientesSeleccionados=[];
       }
     });
   }
